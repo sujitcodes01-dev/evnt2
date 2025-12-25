@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catering Service Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        // Prices per plate type
+        const platePrices = {
+            "Classic": 500,
+            "Standard": 1000,
+            "Premium": 1500,
+            "Luxury": 2500
+        };
+
+        function updatePrice() {
+            const plateType = document.getElementById("plate_type").value;
+            const priceField = document.getElementById("price");
+            priceField.value = platePrices[plateType] || "";
+        }
+    </script>
+</head>
+<body>
+    <h1>Catering Service Booking</h1>
+    <form method="post" action="catering">
+
+        <label for="event_id">Event ID:</label>
+        <input type="text" id="event_id" name="event_id" required>
+
+        <label for="service_date">Service Date:</label>
+        <input type="date" id="service_date" name="service_date" required>
+
+        <label for="plate_type">Plate Type:</label>
+        <select id="plate_type" name="plate_type" onchange="updatePrice()" required>
+            <option value="">--Select Plate Type--</option>
+            <option value="Classic">Classic</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+            <option value="Luxury">Luxury</option>
+        </select>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" readonly>
+
+        <button type="submit">Book Catering</button>
+    </form>
+</body>
+</html>
