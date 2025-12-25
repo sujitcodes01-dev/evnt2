@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Event</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2d89ef;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b5fbf;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create New Event</h2>
+
+    <form action="CreateEventServlet" method="post">
+        <!-- New Event ID input -->
+        <label for="eventId">Event ID</label>
+        <input type="text" id="eventId" name="eventId" placeholder="Enter event ID" required>
+
+        <label for="eventName">Event Name</label>
+        <input type="text" id="eventName" name="eventName" placeholder="Enter event name" required>
+
+        <button type="submit">Create Event</button>
+    </form>
+</div>
+
+</body>
+</html>
