@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hall Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 15px 0;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2d89ef;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b5fbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hall Booking</h2>
+        <form action="hallBooking" method="post">
+            <!-- Event ID -->
+            <label for="eventId">Event ID</label>
+            <input type="number" id="eventId" name="eventId" placeholder="Enter event ID" required>
+
+            <!-- Hall Area -->
+            <label for="area">Hall Area</label>
+            <select id="area" name="area" required onchange="updatePrice()">
+                <option value="">Select area</option>
+                <option value="200">200 sq feet</option>
+                <option value="500">500 sq feet</option>
+                <option value="800">800 sq feet</option>
+                <option value="1000">1000 sq feet</option>
+            </select>
+
+            <!-- Date of Service -->
+            <label for="dateOfService">Date of Service</label>
+            <input type="date" id="dateOfService" name="dateOfService" required>
+
+            <!-- Price (auto-filled) -->
+            <label for="price">Price</label>
+            <input type="number" step="0.01" id="price" name="price" placeholder="Price will auto-fill" required readonly>
+
+            <button type="submit">Book Hall</button>
+        </form>
+    </div>
+
+    <script>
+        // Update price based on selected hall area
+        function updatePrice() {
+            const area = document.getElementById("area").value;
+            const priceInput = document.getElementById("price");
+
+            let price = 0;
+            if(area === "200") price = 1000;
+            else if(area === "500") price = 25000;
+            else if(area === "800") price = 40000;
+            else if(area === "1000") price = 55000;
+
+            priceInput.value = price;
+        }
+    </script>
+</body>
+</html>
