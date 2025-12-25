@@ -1,0 +1,49 @@
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.sql.*;
+
+public class CreateEventServlet extends HttpServlet {
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws IOException, ServletException {
+
+        res.setContentType("text/html");
+        PrintWriter pw1 = res.getWriter();
+
+        try {
+            // Get parameters
+            int id = Integer.parseInt(req.getParameter("eventId")); // Convert String to int
+            String nm = req.getParameter("eventName");
+
+            // Load Oracle JDBC driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // Connect to database
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521:XE", "system", "Manager");
+
+            Statement stmt = con.createStatement();
+
+            // Construct SQL query with both event_id and event_name
+            String q1 = "INSERT INTO event (event_id, event_name) VALUES (" + id + ", '" + nm + "')";
+
+            int x = stmt.executeUpdate(q1);
+
+            if (x > 0) {
+                pw1.println("<h3 class='success'>Event Created!</h3>");
+                pw1.println("<a href='bookingEvent.html'>Go to Booking page</a>");
+            } else {
+                pw1.println("<h3 class='error'>Registration Failed.</h3>");
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            pw1.println("<h3 class='error'>Error: " + e + "</h3>");
+        }
+
+        pw1.println("</div></body></html>");
+        pw1.close();
+    }
+}
